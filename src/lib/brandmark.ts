@@ -1,0 +1,1 @@
+export const BRANDMARK_PATH = "M 20 60 Q 40 20 60 60 T 100 60";

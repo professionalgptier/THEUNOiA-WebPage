@@ -1,65 +1,76 @@
-export const BRAND = {
-  name: "THEUNOiA",
-  tagline: "Independence starts here.",
-  description:
-    "Bharat's student-first freelance ecosystem. Where beautiful thinking finds its ocean.",
-  mascot: "Luna",
-  pronunciation: "the-yoo-NOY-uh",
+export const ROUTES = {
+  home: "/",
+  hunhar: "/hunhar",
+  mentoria: "/mentoria",
+  guild: "/the-guild",
 } as const;
 
-export const SECTIONS = [
-  { id: "hero", label: "Surface" },
-  { id: "behind-name", label: "Descending" },
-  { id: "ocean-theory", label: "The Deep" },
-  { id: "pillars", label: "The Deep" },
-  { id: "stats", label: "Rising" },
-  { id: "team-teaser", label: "Rising" },
-  { id: "cta", label: "Shoreline" },
-] as const;
-
 export const NAV_LINKS = [
-  { label: "SkillBridge", href: "#pillars" },
-  { label: "Mentorship", href: "#pillars" },
-  { label: "Team", href: "#team-teaser" },
-  { label: "Get Started", href: "#cta" },
+  { label: "Hunhar", href: ROUTES.hunhar },
+  { label: "Mentoria", href: ROUTES.mentoria },
+  { label: "The Guild", href: ROUTES.guild },
 ] as const;
 
-export const CONNECT_CITIES = [
-  "Nagpur",
-  "Bengaluru",
-  "Mumbai",
-  "Raipur",
-  "Coimbatore",
-  "Bhubaneswar",
+export const THREE_PARTS = [
+  {
+    slug: "hunhar",
+    title: "Hunhar",
+    link: { href: ROUTES.hunhar },
+  },
+  {
+    slug: "mentoria",
+    title: "Mentoria",
+    link: { href: ROUTES.mentoria },
+  },
+  {
+    slug: "guild",
+    title: "The Guild",
+    link: { href: ROUTES.guild },
+  },
 ] as const;
+
+export const LANDING_SECTIONS = [
+  { id: "hero", label: "Surface" },
+  { id: "behind-name", label: "Name" },
+  { id: "ocean-theory", label: "Ocean" },
+  { id: "three-parts", label: "Parts" },
+  { id: "stats", label: "Stats" },
+  { id: "team", label: "Team" },
+  { id: "cta", label: "Call" },
+  { id: "footer", label: "Floor" },
+] as const;
+
+export type SectionDef = (typeof LANDING_SECTIONS)[number];
 
 export const STATS = [
-  { value: 72, suffix: "%", label: "Freelance economy growth, India" },
-  { value: 6, suffix: "", label: "CONNECT chapter cities" },
-  { value: 1000, suffix: "+", label: "Individuals reached by CONNECT" },
-  { value: 18, suffix: "–25", label: "SkillBridge target age range" },
+  { label: "Student freelancers", value: "2,400+" },
+  { label: "Mentors engaged", value: "180+" },
+  { label: "City chapters", value: "12" },
+  { label: "Project wins", value: "8,900+" },
 ] as const;
 
-export const PILLARS = [
-  {
-    title: "SkillBridge",
-    description:
-      "Bharat's student-first freelancing platform. AI-assisted skill verification and flexible bidding — talent judged on capability, not certificates alone.",
-    link: { label: "Explore SkillBridge →", href: "#" },
-    icon: "skillbridge" as const,
-  },
-  {
-    title: "Mentorship",
-    description:
-      "Not lectures — guidance. Mentors who've walked the path, helping students build direction, confidence, and their first real opportunities.",
-    link: { label: "Meet the mentors →", href: "#" },
-    icon: "mentorship" as const,
-  },
-  {
-    title: "CONNECT",
-    description:
-      "Our on-ground initiative across Nagpur, Bengaluru, Mumbai, Raipur, Coimbatore, and Bhubaneswar — bridging talent, industry, and community.",
-    link: { label: "Find your city →", href: "#" },
-    icon: "connect" as const,
-  },
+export const CITIES = [
+  "Bangalore",
+  "Mumbai",
+  "Delhi",
+  "Hyderabad",
+  "Pune",
+  "Chennai",
+  "Kolkata",
+  "Ahmedabad",
+  "Jaipur",
+  "Lucknow",
+  "Chandigarh",
+  "Indore",
 ] as const;
+
+export const BRAND = {
+  colors: {
+    navy: "#0A1B37",
+    "navy-deep": "#060f22",
+    gold: "#CBA96B",
+    terracotta: "#C06B3E",
+    beige: "#B7AA9A",
+    ivory: "#F3EFE6",
+  },
+} as const;
