@@ -1,41 +1,144 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-:root {
-  --navy: #0A1B37;
-  --navy-deep: #060f22;
-  --gold: #CBA96B;
-  --terracotta: #C06B3E;
-  --beige: #B7AA9A;
-  --ivory: #F3EFE6;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy text-ivory font-body;
+  }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--navy);
-  color: var(--ivory);
-  overflow-x: hidden;
-}
-
-/* ---------- Grain overlay ---------- */
+/* Grain overlay */
 .grain {
   position: fixed;
   inset: 0;
-  z-index: 2;
   pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' seed='1' /%3E%3C/filter%3E%3Crect width='100' height='100' fill='%230A1B37' filter='url(%23noise)' opacity='0.05' /%3E%3C/svg%3E");
   mix-blend-mode: overlay;
+}
+
+/* ---------- Animated logo ---------- */
+.logo-oia {
+  background: linear-gradient(
+    100deg,
+    #C16C3E 0%,
+    #F0D197 35%,
+    #CBA96B 50%,
+    #F0D197 65%,
+    #C16C3E 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: logo-shimmer 6s ease-in-out infinite;
+}
+
+.logo-animated:hover .logo-oia {
+  animation-duration: 1.6s;
+}
+
+.logo-waterline {
+  background: linear-gradient(90deg, rgba(203,169,107,0) 0%, #CBA96B 40%, #C06B3E 100%);
+  opacity: 0.85;
+}
+
+@keyframes logo-shimmer {
+  0%   { background-position: 100% 0; }
+  50%  { background-position: 0% 0; }
+  100% { background-position: 100% 0; }
+}
+
+/* ---------- Animated gradients (see docs/BACKGROUND_RESOURCES.md) ---------- */
+.animated-gradient {
+  background: linear-gradient(-45deg, #060f22, #0A1B37, #1a2d4d, #0A1B37);
+  background-size: 400% 400%;
+  animation: gradient-shift 20s ease infinite;
+}
+
+.brand-gradient {
+  position: relative;
+  background: linear-gradient(-45deg, #060f22, #0A1B37, #1a2d4d, #192a40);
+  background-size: 400% 400%;
+  animation: gradient-shift 25s ease infinite;
+}
+
+.brand-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(203,169,107,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(192,107,62,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------- Section overlays ---------- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Faint gold mesh for "Behind the name" */
+.overlay-mesh-gold {
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 20%, rgba(203,169,107,0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 85% 70%, rgba(192,107,62,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 60% 10%, rgba(240,209,151,0.05) 0%, transparent 70%);
+}
+
+/* Subtle repeating wave pattern for card grids */
+.overlay-pattern-waves {
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40' viewBox='0 0 120 40'%3E%3Cpath d='M0 20c15-12 30-12 45 0s30 12 45 0 30-12 30 0' fill='none' stroke='%23CBA96B' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-size: 120px 40px;
+}
+
+/* Faint particle field for stats */
+.overlay-particles {
+  opacity: 0.35;
+  background-image:
+    radial-gradient(circle at 12% 30%, rgba(203,169,107,0.35) 0 1px, transparent 2px),
+    radial-gradient(circle at 48% 70%, rgba(203,169,107,0.28) 0 1px, transparent 2px),
+    radial-gradient(circle at 80% 25%, rgba(240,209,151,0.3) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 30% 85%, rgba(203,169,107,0.22) 0 1px, transparent 2px),
+    radial-gradient(circle at 65% 45%, rgba(203,169,107,0.2) 0 1px, transparent 2px),
+    radial-gradient(circle at 92% 80%, rgba(240,209,151,0.25) 0 1px, transparent 2px);
+  background-size: 340px 260px;
+}
+
+/* Warm linen texture for ivory sections */
+.overlay-linen {
+  opacity: 0.35;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(10,27,55,0.035) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(10,27,55,0.035) 0 1px, transparent 1px 3px);
+}
+
+/* ---------- Wave divider drift ---------- */
+.wave-drift,
+.wave-drift-slow,
+.wave-drift-fast {
+  animation: wave-drift linear infinite;
+}
+.wave-drift       { animation-duration: 22s; }
+.wave-drift-slow  { animation-duration: 34s; }
+.wave-drift-fast  { animation-duration: 15s; }
+
+@keyframes wave-drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-1440px); }
 }
 
 /* ---------- Scrollbar ---------- */
@@ -44,28 +147,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--navy-deep);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--gold);
+  background: rgba(203, 169, 107, 0.5);
   border-radius: 3px;
 }
 
-/* ---------- Selection ---------- */
-::selection {
-  background: rgba(203, 169, 107, 0.3);
-  color: var(--ivory);
-}
-
-/* ---------- Reduced motion ---------- */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(203, 169, 107, 0.8);
 }
